@@ -6,7 +6,15 @@ metadata:
 spec:
   instances: 3  # Number of PostgreSQL replicas
   storage:
-    size: 20Gi  # Adjust based on your needs
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: longhorn
+  monitoring:
+    enablePodMonitor: true
   primaryUpdateStrategy: unsupervised
   postgresql:
     parameters:
