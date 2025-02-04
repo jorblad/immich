@@ -12,6 +12,8 @@ spec:
     helm:
       values: |
         immich:
+          metrics:
+            enabled: true
           persistence:
             library:
               existingClaim: immich-nfs-pvc
