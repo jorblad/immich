@@ -13,7 +13,8 @@ spec:
       values: |
         immich:
           persistence:
-            existingClaim: immich-nfs-pvc
+            library:
+              existingClaim: immich-nfs-pvc
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
