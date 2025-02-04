@@ -8,10 +8,21 @@ spec:
   storage:
     size: 20Gi  # Adjust based on your needs
   primaryUpdateStrategy: unsupervised
+  postgresql:
+    parameters:
+      shared_buffers: 500MB # use 25% of resources.limits
+    shared_preload_libraries:
+      - 'vectors.so'
+
   bootstrap:
     initdb:
-      database: immich
-      owner: immich
-      secret:
-        name: immich-db-user
+      database: app
+      owner: app
+      dataChecksums: true
+
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vector";
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
   enableSuperuserAccess: true
