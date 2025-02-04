@@ -18,7 +18,7 @@ spec:
     enablePodMonitor: true
   primaryUpdateStrategy: unsupervised
   postgresql:
-    image: cloudnative-pgvecto.rs:latest  # Use the custom image
+    image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest  # Use the custom image
     parameters:
       shared_buffers: 500MB # use 25% of resources.limits
     shared_preload_libraries:
