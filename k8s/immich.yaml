@@ -17,6 +17,11 @@ spec:
           persistence:
             library:
               existingClaim: immich-nfs-pvc
+        redis:
+          enabled: true
+          architecture: standalone
+          auth:
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
