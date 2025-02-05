@@ -17,6 +17,9 @@ spec:
           persistence:
             library:
               existingClaim: immich-nfs-pvc
+          postgresql:
+            auth:
+              existingSecret: immich-db-app
         redis:
           enabled: true
           architecture: standalone
