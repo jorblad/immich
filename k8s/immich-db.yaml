@@ -19,10 +19,15 @@ spec:
   primaryUpdateStrategy: unsupervised
   postgresql:
     image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest  # Use the custom image
-    parameters:
-      shared_buffers: 500MB # use 25% of resources.limits
     shared_preload_libraries:
       - 'vectors.so'
+
+  bootstrap:
+    initdb:
+      image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest
+      postInitSQL:
+        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
 
   #bootstrap:
     #initdb:
