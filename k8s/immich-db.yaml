@@ -4,6 +4,7 @@ metadata:
   name: immich-db
   namespace: immich
 spec:
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest  # Use the custom image
   instances: 3  # Number of PostgreSQL replicas
 
   storage:
@@ -18,26 +19,18 @@ spec:
     enablePodMonitor: true
   primaryUpdateStrategy: unsupervised
   postgresql:
-    image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest  # Use the custom image
     shared_preload_libraries:
       - 'vectors.so'
 
   bootstrap:
     initdb:
-      image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:latest
-      postInitSQL:
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+      database: app
+      owner: app
+      dataChecksums: true
+
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vector";
         - CREATE EXTENSION IF NOT EXISTS "vectors";
-
-  #bootstrap:
-    #initdb:
-      #database: app
-      #owner: app
-      #dataChecksums: true
-
-      #postInitApplicationSQL:
-        #- CREATE EXTENSION IF NOT EXISTS "vector";
-        #- CREATE EXTENSION IF NOT EXISTS "vectors";
-        #- CREATE EXTENSION IF NOT EXISTS "cube";
-        #- CREATE EXTENSION IF NOT EXISTS "earthdistance";
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
   enableSuperuserAccess: true
