@@ -24,8 +24,8 @@ spec:
 
   bootstrap:
     initdb:
-      database: app
-      owner: app
+      database: immich
+      owner: immich
       dataChecksums: true
 
       postInitApplicationSQL:
