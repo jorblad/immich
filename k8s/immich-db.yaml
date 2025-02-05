@@ -24,15 +24,15 @@ spec:
     shared_preload_libraries:
       - 'vectors.so'
 
-  bootstrap:
-    initdb:
-      database: app
-      owner: app
-      dataChecksums: true
+  #bootstrap:
+    #initdb:
+      #database: app
+      #owner: app
+      #dataChecksums: true
 
-      postInitApplicationSQL:
-        - CREATE EXTENSION IF NOT EXISTS "vector";
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
-        - CREATE EXTENSION IF NOT EXISTS "cube";
-        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+      #postInitApplicationSQL:
+        #- CREATE EXTENSION IF NOT EXISTS "vector";
+        #- CREATE EXTENSION IF NOT EXISTS "vectors";
+        #- CREATE EXTENSION IF NOT EXISTS "cube";
+        #- CREATE EXTENSION IF NOT EXISTS "earthdistance";
   enableSuperuserAccess: true
