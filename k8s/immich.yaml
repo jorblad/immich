@@ -12,12 +12,26 @@ spec:
     helm:
       values: |
         env:
-          REDIS_HOSTNAME: '{{ printf "%s-redis-master" .Release.Name }}'
-          DB_HOSTNAME: "{{ .Values.postgresql.global.postgresql.auth.host }}"
-          DB_USERNAME: "{{ .Values.postgresql.global.postgresql.auth.username }}"
-          DB_DATABASE_NAME: "{{ .Values.postgresql.global.postgresql.auth.dbname }}"
-          # -- You should provide your own secret outside of this helm-chart and use `postgresql.global.postgresql.auth.existingSecret` to provide credentials to the postgresql instance
-          DB_PASSWORD: "{{ .Values.postgresql.global.postgresql.auth.password }}"  
+          - name: DB_HOSTNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.postgresql.auth.existingSecret }}
+                key: DB_HOSTNAME
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.postgresql.auth.existingSecret }}
+                key: DB_USERNAME
+          - name: DB_DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.postgresql.auth.existingSecret }}
+                key: DB_DATABASE_NAME
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.postgresql.auth.existingSecret }}
+                key: DB_PASSWORD
         immich:
           metrics:
             enabled: true
