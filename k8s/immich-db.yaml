@@ -6,6 +6,8 @@ metadata:
 spec:
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
   instances: 2  # Number of PostgreSQL replicas
+  superuserSecret:
+    name: immich-pg-superuser
   enableSuperuserAccess: true
 
   storage:
