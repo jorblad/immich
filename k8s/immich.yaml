@@ -12,6 +12,8 @@ spec:
     helm:
       values: |
         env:
+          - name: REDIS_HOSTNAME
+            value: immich-app-redis-master-0
           - name: DB_HOSTNAME
             valueFrom:
               secretKeyRef:
