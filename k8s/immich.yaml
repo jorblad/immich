@@ -19,7 +19,7 @@ spec:
               existingClaim: immich-nfs-pvc
           postgresql:
             auth:
-              existingSecret: immich-pg-user
+              existingSecret: immich-pg-app
         redis:
           enabled: true
           architecture: standalone
