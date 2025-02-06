@@ -52,6 +52,10 @@ spec:
           architecture: standalone
           auth:
             enabled: false
+        service:
+          server:
+            type: LoadBalancer
+            loadBalancerIP: 192.168.254.11
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
