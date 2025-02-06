@@ -40,6 +40,13 @@ spec:
           persistence:
             library:
               existingClaim: immich-nfs-pvc
+          configuration:
+            trash:
+              enabled: true
+              days: 30
+            storageTemplate:
+              enabled: true
+              template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
         redis:
           enabled: true
           architecture: standalone
