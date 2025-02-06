@@ -15,22 +15,22 @@ spec:
           - name: DB_HOSTNAME
             valueFrom:
               secretKeyRef:
-                name: immich-pg-superuser
+                name: immich-db-superuser
                 key: host
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: immich-pg-superuser
+                name: immich-db-superuser
                 key: username
           - name: DB_DATABASE_NAME
             valueFrom:
               secretKeyRef:
-                name: immich-pg-superuser
+                name: immich-db-superuser
                 key: dbname
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: immich-pg-superuser
+                name: immich-db-superuser
                 key: password
         immich:
           metrics:
