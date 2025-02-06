@@ -8,5 +8,5 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /mnt/local-storage/Homes/samuel/immich
+    path: /mnt/local-storage/immich
     server: 192.168.210.30
