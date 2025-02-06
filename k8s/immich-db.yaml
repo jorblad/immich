@@ -13,6 +13,10 @@ spec:
         superuser: true
         login: true
 
+      - name: app
+        superuser: true
+        login: true
+
   storage:
     pvcTemplate:
       accessModes:
