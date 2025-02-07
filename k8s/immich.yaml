@@ -11,6 +11,8 @@ spec:
     targetRevision: 0.9.0
     helm:
       values: |
+        image:
+          tag: v1.125.7
         env:
           - name: REDIS_HOSTNAME
             value: immich-app-redis-master
