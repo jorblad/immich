@@ -16,6 +16,8 @@ spec:
         env:
           - name: REDIS_HOSTNAME
             value: immich-app-redis-master
+          - name: IMMICH_MACHINE_LEARNING_URL
+            value: http://immich-app-machine-learning:3003
           - name: DB_HOSTNAME
             valueFrom:
               secretKeyRef:
