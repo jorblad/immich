@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         image:
-          tag: v1.125.7
+          tag: v1.126.1
         env:
           - name: REDIS_HOSTNAME
             value: immich-app-redis-master
