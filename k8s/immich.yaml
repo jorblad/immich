@@ -67,6 +67,9 @@ spec:
 
         machine-learning:
           enabled: true
+          controller:
+            replicas: 2
+            strategy: RollingUpdate
           image:
             repository: ghcr.io/immich-app/immich-machine-learning
             pullPolicy: IfNotPresent
