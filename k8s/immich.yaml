@@ -56,6 +56,22 @@ spec:
           architecture: standalone
           auth:
             enabled: false
+
+        machine-learning:
+          enabled: true
+          image:
+            repository: ghcr.io/immich-app/immich-machine-learning
+            pullPolicy: IfNotPresent
+          env:
+            TRANSFORMERS_CACHE: /cache
+          persistence:
+            cache:
+              enabled: true
+              size: 10Gi
+              # Optional: Set this to pvc to avoid downloading the ML models every start.
+              type: pvc
+              accessMode: ReadWriteMany
+              storageClass: longhorn
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
