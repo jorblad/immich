@@ -57,6 +57,12 @@ spec:
           auth:
             enabled: false
 
+        server:
+          enabled: true
+          controller:
+            replicas: 2
+            strategy: RollingUpdate
+
         machine-learning:
           enabled: true
           image:
