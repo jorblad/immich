@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: immich-nfs-shared-pvc
 spec:
+    volumeName: immich-nfs-shared-pv
   storageClassName: ""
   accessModes:
     - ReadWriteMany
