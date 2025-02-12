@@ -64,6 +64,12 @@ spec:
           controller:
             replicas: 2
             strategy: RollingUpdate
+          persistence:
+            lightroom:
+              enabled: true
+              type: pvc
+              mountPath: /mnt/lightroom
+              existingClaim: immich-nfs-shared-pvc
 
         machine-learning:
           enabled: true
@@ -83,15 +89,12 @@ spec:
               type: pvc
               accessMode: ReadWriteMany
               storageClass: longhorn
+            lightroom:
+              enabled: true
+              type: pvc
+              mountPath: /mnt/lightroom
+              existingClaim: immich-nfs-shared-pvc
 
-        volumes:
-          - name: immich-nfs-shared-volume
-            persistentVolumeClaim:
-              claimName: immich-nfs-shared-pvc
-
-        volumeMounts:
-          - mountPath: /mnt/photos
-            name: immich-nfs-shared-volume
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
