@@ -60,16 +60,16 @@ spec:
           architecture: standalone
           auth:
             enabled: false
-          controller:
-            replicas: 2
-            strategy: RollingUpdate
-          resources:
-            limits:
-              cpu: 500m
-              memory: 1024Mi
-            requests:
-              cpu: 100m
-              memory: 256Mi
+          master:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1024Mi
+              requests:
+                cpu: 100m
+                memory: 256Mi
+          replica:
+            replicaCount: 2
 
         server:
           enabled: true
