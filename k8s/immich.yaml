@@ -63,6 +63,26 @@ spec:
 
         server:
           enabled: true
+          ingress:
+            main:
+              enabled: true
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt-production
+                kubernetes.io/ingress.class: traefik
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/redirect-entry-point: websecure
+                traefik.ingress.kubernetes.io/redirect-permanent: "true"
+                traefik.ingress.kubernetes.io/preserve-host: "true"
+                # proxy-body-size is set to 0 to remove the body limit on file uploads
+                traefik.ingress.kubernetes.io/proxy-body-size: "0"
+              hosts:
+                - host: immich.jorblad.se
+                  paths:
+                    - path: "/"
+              tls:
+                - secretName: immich-jorblad-se-tls
+                  hosts:
+                    - immich.jorblad.se
           controller:
             replicas: 2
             strategy: RollingUpdate
