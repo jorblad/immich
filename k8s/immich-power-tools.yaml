@@ -22,11 +22,16 @@ spec:
             - secretRef:
                 name: immich-power-tools-secret
           env:
-          - name: DB_HOSTNAME
+          - name: DB_HOST
             valueFrom:
               secretKeyRef:
                 name: immich-db-app
                 key: host
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: immich-db-app
+                key: port
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
