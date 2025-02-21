@@ -4,7 +4,7 @@ metadata:
   name: immich-db
   namespace: immich
 spec:
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16  # Use the custom image
   instances: 2  # Number of PostgreSQL replicas
   enableSuperuserAccess: true
   managed:
@@ -26,7 +26,7 @@ spec:
           storage: 20Gi
       storageClassName: longhorn
   monitoring:
-    enablePodMonitor: true
+    enablePodMonitor: false
   primaryUpdateStrategy: unsupervised
   postgresql:
     shared_preload_libraries:
