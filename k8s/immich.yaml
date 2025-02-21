@@ -48,6 +48,10 @@ spec:
           persistence:
             library:
               existingClaim: immich-nfs-pvc
+          servicemonitor:
+            enabled: true
+            labels:
+              release: prometheus-community
           configuration:
             trash:
               enabled: true
