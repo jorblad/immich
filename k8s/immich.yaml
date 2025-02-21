@@ -17,7 +17,7 @@ spec:
           - name: METRICS_ENABLED
             value: "true"
           - name: IMMICH_TELEMETRY_INCLUDE
-            value: true
+            value: all
           - name: REDIS_HOSTNAME
             value: immich-app-redis-master
           - name: IMMICH_MACHINE_LEARNING_URL
