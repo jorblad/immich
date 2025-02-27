@@ -4,7 +4,7 @@ metadata:
   name: immich-db
   namespace: immich
 spec:
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.2.1  # Use the custom image
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16  # Use the custom image
   instances: 2  # Number of PostgreSQL replicas
   enableSuperuserAccess: true
   managed:
