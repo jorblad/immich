@@ -6,6 +6,7 @@ metadata:
 spec:
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
   instances: 1  # Number of PostgreSQL replicas
+  enablePDB: false
   enableSuperuserAccess: true
   managed:
     roles:
