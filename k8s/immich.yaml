@@ -8,11 +8,11 @@ spec:
   source:
     repoURL: https://immich-app.github.io/immich-charts
     chart: immich
-    targetRevision: 0.9.1
+    targetRevision: 0.9.2
     helm:
       values: |
         image:
-          tag: v1.130.0
+          tag: v1.130.1
         env:
           - name: METRICS_ENABLED
             value: "true"
