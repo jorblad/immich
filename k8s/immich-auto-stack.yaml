@@ -34,7 +34,9 @@ spec:
               value: "False"
             - name: CRITERIA
               value: '[{"key":"originalFileName","regex":{"key":"^([a-zA-Z]+(?:_\\d+)+|[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})","index":1}},{"key":"localDateTime","split":{"key":"T","index":0}}]'
+            - name: SKIP_MATCH_MISS
+              value: "True"
             - name: CRON_EXPRESSION
-              value: "15 */1 * * *"
+              value: "20 */1 * * *"
             - name: TZ
               value: Europe/Stockholm
