@@ -43,7 +43,11 @@ spec:
                       }
                     },
                     {
-                      "key": "localDateTime"
+                      "key": "localDateTime",
+                      "split": {
+                        "key": "T",
+                        "index": 0
+                      }
                     }
                 ]
             - name: CRON_EXPRESSION
