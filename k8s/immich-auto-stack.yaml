@@ -36,4 +36,3 @@ spec:
               value: "0 */1 * * *"
             - name: TZ
               value: Europe/Stockholm
-          restartPolicy: Always
