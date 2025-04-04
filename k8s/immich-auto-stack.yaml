@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-auto-stack
+  labels:
+    app: immich-auto-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-auto-stack
+  template:
+    metadata:
+      labels:
+        app: immich-auto-stack
+    spec:
+      containers:
+        - name: immich-auto-stack
+          image: ghcr.io/tenekev/immich-auto-stack:latest
+          env:
+            - name: API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: immich-power-tools-secret
+                  key: IMMICH_URL
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: immich-power-tools-secret
+                  key: IMMICH_API_KEY
+            - name: DRY_RUN
+              value: "False"
+            - name: SKIP_PREVIOUS
+              value: "True"
+            - name: CRON_EXPRESSION
+              value: "0 */1 * * *"
+            - name: TZ
+              value: Europe/Stockholm
+          restartPolicy: Always
