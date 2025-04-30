@@ -43,6 +43,8 @@ spec:
             value: "YYYY-MM-DD"
           - name: KIOSK_ALBUM
             value: "all"
+          - name: KIOSK_LAYOUT
+            value: "splitview"
           - name: KIOSK_SHOW_TIME
             value: "true"
           - name: KIOSK_SHOW_DATE
@@ -52,6 +54,8 @@ spec:
           - name: KIOSK_SHOW_PERSON_NAME
             value: "true"
           - name: KIOSK_SHOW_PERSON_AGE
+            value: "true"
+          - name: KIOSK_SHOW_IMAGE_LOCATION
             value: "true"
 
 ---
