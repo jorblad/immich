@@ -39,6 +39,10 @@ spec:
             value: "sv_SE"
           - name: TZ
             value: "Europe/Stockholm"
+          - name: KIOSK_DATE_FORMAT
+            value: "YYYY-MM-DD"
+          - name: KIOSK_ALBUM
+            value: "all"
           - name: KIOSK_SHOW_TIME
             value: "true"
           - name: KIOSK_SHOW_DATE
