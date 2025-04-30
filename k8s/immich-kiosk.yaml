@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-kiosk
+  namespace: immich
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-kiosk
+  template:
+    metadata:
+      labels:
+        app: immich-kiosk
+    spec:
+      containers:
+        - name: immich-kiosk
+          image: ghcr.io/damongolding/immich-kiosk:latest
+          ports:
+            - containerPort: 3000
+          env:
+          - name: KIOSK_IMMICH_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_API_KEY
+          - name: KIOSK_IMMICH_URL
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_URL
+          - name: KIOSK_IMMICH_EXTERNAL_URL
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_EXTERNAL_URL
+
+          - name: LANG
+            value: "sv_SE"
+          - name: TZ
+            value: "Europe/Stockholm"
+          - name: KIOSK_SHOW_TIME
+            value: "true"
+          - name: KIOSK_SHOW_DATE
+            value: "true"
+          - name: KIOSK_SHOW_ALBUM_NAME
+            value: "true"
+          - name: KIOSK_SHOW_PERSON_NAME
+            value: "true"
+          - name: KIOSK_SHOW_PERSON_AGE
+            value: "true"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: immich-kiosk-svc
+  namespace: immich
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.254.18
+  externalTrafficPolicy: Local
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: immich-kiosk
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich-kiosk-ingress
+  namespace: immich
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  rules:
+  - host: immich-kiosk.k8s.sj-tech.se
+    http:
+      paths:
+      - backend:
+          service:
+            name: immich-kiosk-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - immich-kiosk.k8s.sj-tech.se
+    secretName: immich-kiosk-k8s-sj-tech-se-tls
