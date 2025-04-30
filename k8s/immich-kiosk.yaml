@@ -59,6 +59,8 @@ spec:
             value: "true"
           - name: KIOSK_BACKGROUND_BLUR
             value: "false"
+          - name: KIOSK_EXCLUDED_ALBUMS
+            value: "c5c36509-af76-444f-9423-192761e97485,d4519543-56ac-4da7-bbca-a6a4e9957f9a"
 
 ---
 apiVersion: v1
