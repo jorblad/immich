@@ -33,7 +33,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: immich-power-tools-secret
-                key: IMMICH_EXTERNAL_URL
+                key: EXTERNAL_IMMICH_URL
 
           - name: LANG
             value: "sv_SE"
