@@ -9,8 +9,8 @@ spec:
   instances: 2  # Number of PostgreSQL replicas
   enablePDB: false
   enableSuperuserAccess: true
-  postgresUID: 0
-  postgresGID: 0
+  postgresUID: 999
+  postgresGID: 999
   managed:
     roles:
       - name: immich
