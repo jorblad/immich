@@ -35,6 +35,7 @@ spec:
   postgresql:
     shared_preload_libraries:
       - 'vectors.so'
+      - 'vchord'
 
 #bootstrap:
 # initdb:
