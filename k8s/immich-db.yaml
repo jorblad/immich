@@ -30,9 +30,9 @@ spec:
   monitoring:
     enablePodMonitor: false
   primaryUpdateStrategy: unsupervised
-  postgresql:
-    shared_preload_libraries:
-      - 'vectors.so'
+  # postgresql:
+  #   shared_preload_libraries:
+  #     - 'vectors.so'
 
 #bootstrap:
 # initdb:
