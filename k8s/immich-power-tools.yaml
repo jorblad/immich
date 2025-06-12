@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: immich-power-tools
-          image: ghcr.io/varun-raj/immich-power-tools:v0.16.0
+          image: ghcr.io/varun-raj/immich-power-tools:latest
           ports:
             - containerPort: 3000
           envFrom:
