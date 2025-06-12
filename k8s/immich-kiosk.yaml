@@ -24,6 +24,11 @@ spec:
               secretKeyRef:
                 name: immich-power-tools-secret
                 key: IMMICH_API_KEY
+          - name: KIOSK_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_API_KEY
           - name: KIOSK_IMMICH_URL
             valueFrom:
               secretKeyRef:
@@ -90,7 +95,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
-  - host: immich-kiosk.k8s.sj-tech.se
+  - host: immich-kiosk.sj-tech.se
     http:
       paths:
       - backend:
@@ -102,5 +107,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - immich-kiosk.k8s.sj-tech.se
-    secretName: immich-kiosk-k8s-sj-tech-se-tls
+    - immich-kiosk.sj-tech.se
+    secretName: immich-kiosk-sj-tech-se-tls
