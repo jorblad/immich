@@ -95,7 +95,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
-  - host: immich-kiosk.sj-tech.se
+  - host: immich-kiosk.jorblad.se
     http:
       paths:
       - backend:
@@ -107,5 +107,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - immich-kiosk.sj-tech.se
-    secretName: immich-kiosk-sj-tech-se-tls
+    - immich-kiosk.jorblad.se
+    secretName: immich-kiosk-jorblad-se-tls
