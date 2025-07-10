@@ -133,6 +133,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: immich
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
