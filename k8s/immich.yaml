@@ -42,8 +42,6 @@ spec:
               secretKeyRef:
                 name: immich-db-app
                 key: password
-          - name: IMMICH_TRUSTED_PROXIES
-            value: 192.168.190.147
         immich:
           metrics:
             enabled: true
@@ -96,7 +94,7 @@ spec:
                   hosts:
                     - immich.jorblad.se
           controller:
-            replicas: 2
+            replicas: 1
             strategy: RollingUpdate
           persistence:
             lightroom:
