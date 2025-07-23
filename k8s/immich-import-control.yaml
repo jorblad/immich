@@ -1,29 +1,29 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: immich-import-control
-#   namespace: immich
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: immich-import-control
-#   template:
-#     metadata:
-#       labels:
-#         app: immich-import-control
-#     spec:
-#       containers:
-#         - name: immich-import-control
-#           image: docker.io/eugeniumegherea/immich-import-control:0.2.0
-#           env:
-#           - name: API_KEY
-#             valueFrom:
-#               secretKeyRef:
-#                 name: immich-power-tools-secret
-#                 key: IMMICH_API_KEY
-#           - name: SERVER_URL
-#             valueFrom:
-#               secretKeyRef:
-#                 name: immich-power-tools-secret
-#                 key: IMMICH_URL
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-import-control
+  namespace: immich
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-import-control
+  template:
+    metadata:
+      labels:
+        app: immich-import-control
+    spec:
+      containers:
+        - name: immich-import-control
+          image: docker.io/eugeniumegherea/immich-import-control:0.2.0
+          env:
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_API_KEY
+          - name: SERVER_URL
+            valueFrom:
+              secretKeyRef:
+                name: immich-power-tools-secret
+                key: IMMICH_URL
