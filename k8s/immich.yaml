@@ -102,7 +102,7 @@ spec:
               ## resources, such as Minikube. If you do want to specify resources, uncomment the following
               ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
               limits:
-                cpu: 1.5
+                cpu: 1
                 memory: 1024Mi
               # requests:
               #   cpu: 100m
@@ -117,8 +117,22 @@ spec:
         machine-learning:
           enabled: true
           controller:
+            limits:
+                cpu: 1
+                memory: 1024Mi
             replicas: 2
             strategy: RollingUpdate
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - machine-learning
           image:
             repository: ghcr.io/immich-app/immich-machine-learning
             pullPolicy: IfNotPresent
