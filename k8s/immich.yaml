@@ -107,6 +107,15 @@ spec:
               # requests:
               #   cpu: 100m
               #   memory: 128Mi
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/name: server
+                    topologyKey: "kubernetes.io/hostname"
           persistence:
             lightroom:
               enabled: true
