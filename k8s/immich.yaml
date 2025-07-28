@@ -128,11 +128,10 @@ spec:
                 - weight: 100
                   podAffinityTerm:
                     labelSelector:
-                      matchExpressions:
-                        - key: app.kubernetes.io/name
-                          operator: In
-                          values:
-                            - machine-learning
+                      matchLabels:
+                        app.kubernetes.io/name: machine-learning
+                    topologyKey: "kubernetes.io/hostname"
+
           image:
             repository: ghcr.io/immich-app/immich-machine-learning
             pullPolicy: IfNotPresent
