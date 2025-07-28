@@ -57,7 +57,7 @@ spec:
               template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
         redis:
           enabled: true
-          architecture: standalone
+          architecture: replication
           auth:
             enabled: false
           master:
@@ -70,6 +70,15 @@ spec:
                 memory: 256Mi
           replica:
             replicaCount: 2
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/name: redis
+                    topologyKey: "kubernetes.io/hostname"
 
         server:
           enabled: true
