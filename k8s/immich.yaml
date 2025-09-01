@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         image:
-          tag: v1.139.4
+          tag: v1.140.1
         env:
           - name: METRICS_ENABLED
             value: "true"
