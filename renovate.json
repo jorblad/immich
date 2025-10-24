@@ -37,7 +37,7 @@
         "/^charts/.+values\\.ya?ml$/"
       ],
       "matchStrings": [
-        "controllers:\\s*\\n[\\s\\S]*?main:\\s*\\n[\\s\\S]*?containers:\\s*\\n[\\s\\S]*?main:\\s*\\n[\\s\\S]*?image:\\s*\\n[\\s\\S]*?tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
+        "(?m)^controllers:\\s*\\n[\\s\\S]*?^\\s*main:\\s*\\n[\\s\\S]*?^\\s*containers:\\s*\\n[\\s\\S]*?^\\s*main:\\s*\\n[\\s\\S]*?^\\s*image:\\s*\\n[\\s\\S]*?^\\s*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "ghcr.io/immich-app/immich-server",
