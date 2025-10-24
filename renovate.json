@@ -5,5 +5,23 @@
   ],
   "argocd": {
     "managerFilePatterns": ["/k8s/.+\\.yaml$/"]
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^k8s/.*\\.ya?ml$/",
+        "/^k8s/.*\\.yaml$/"
+      ],
+      "matchStrings": [
+        // tag form e.g. image: registry:5000/org/name:tag or image: org/name:tag
+        "image:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+):(?<currentValue>[^'\\\"\\s@]+)['\\\"]?",
+        // digest form e.g. image: registry/org/name@sha256:abcdef...
+        "image:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+)@(?<currentValue>sha256:[0-9a-fA-F]+)['\\\"]?"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "{{{depName}}}",
+      "versioningTemplate": "docker"
+    }
+  ]
 }
