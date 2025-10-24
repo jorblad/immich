@@ -64,16 +64,16 @@ spec:
                     repository: docker.io/valkey/valkey
                     tag: 8.0-alpine
                     pullPolicy: IfNotPresent
-                  replicas: 2
-                  affinity:
-                    podAntiAffinity:
-                      preferredDuringSchedulingIgnoredDuringExecution:
-                        - weight: 100
-                          podAffinityTerm:
-                            labelSelector:
-                              matchLabels:
-                                app.kubernetes.io/name: redis
-                            topologyKey: "kubernetes.io/hostname"
+              replicas: 2
+              affinity:
+                podAntiAffinity:
+                  preferredDuringSchedulingIgnoredDuringExecution:
+                    - weight: 100
+                      podAffinityTerm:
+                        labelSelector:
+                          matchLabels:
+                            app.kubernetes.io/name: redis
+                        topologyKey: "kubernetes.io/hostname"
 
         server:
           enabled: true
@@ -101,23 +101,21 @@ spec:
                     - immich.jorblad.se
           controller:
             main:
-              containers:
-                main:
-                  replicas: 1
-                  strategy: RollingUpdate
-                  resources:
-                    limits:
-                      cpu: 1
-                      memory: 1024Mi
-                  affinity:
-                    podAntiAffinity:
-                      preferredDuringSchedulingIgnoredDuringExecution:
-                        - weight: 100
-                          podAffinityTerm:
-                            labelSelector:
-                              matchLabels:
-                                app.kubernetes.io/name: server
-                            topologyKey: "kubernetes.io/hostname"
+              replicas: 1
+              strategy: RollingUpdate
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 1024Mi
+              affinity:
+                podAntiAffinity:
+                  preferredDuringSchedulingIgnoredDuringExecution:
+                    - weight: 100
+                      podAffinityTerm:
+                        labelSelector:
+                          matchLabels:
+                            app.kubernetes.io/name: server
+                        topologyKey: "kubernetes.io/hostname"
 
           persistence:
             lightroom:
@@ -131,27 +129,26 @@ spec:
             main:
               containers:
                 main:
-                  resources:
-                    limits:
-                      cpu: 1
-                      memory: 1024Mi
-                  replicas: 2
-                  strategy: RollingUpdate
-                  affinity:
-                  podAntiAffinity:
-                    preferredDuringSchedulingIgnoredDuringExecution:
-                      - weight: 100
-                        podAffinityTerm:
-                          labelSelector:
-                            matchLabels:
-                              app.kubernetes.io/name: machine-learning
-                          topologyKey: "kubernetes.io/hostname"
-
                   image:
                     repository: ghcr.io/immich-app/immich-machine-learning
                     pullPolicy: IfNotPresent
                   env:
                     TRANSFORMERS_CACHE: /cache
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 1024Mi
+              replicas: 2
+              strategy: RollingUpdate
+              affinity:
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution:
+                  - weight: 100
+                    podAffinityTerm:
+                      labelSelector:
+                        matchLabels:
+                          app.kubernetes.io/name: machine-learning
+                      topologyKey: "kubernetes.io/hostname"
           persistence:
             cache:
               enabled: true
