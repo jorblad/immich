@@ -64,8 +64,7 @@ spec:
                     repository: docker.io/valkey/valkey
                     tag: 8.0-alpine
                     pullPolicy: IfNotPresent
-                  replica:
-                    replicaCount: 2
+                  replicas: 2
                   affinity:
                     podAntiAffinity:
                       preferredDuringSchedulingIgnoredDuringExecution:
