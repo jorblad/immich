@@ -22,6 +22,25 @@
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{{depName}}}",
       "versioningTemplate": "docker"
+    },
+
+    // Example manager for values files that only contain a tag (no repository).
+    // Renovate cannot infer the image name from a lone tag; supply the image via depNameTemplate.
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^k8s/.+values\\.ya?ml$/",
+        "/^charts/mychart/.+values\\.ya?ml$/" 
+      ],
+      "matchStrings": [
+        // match a lone tag under image.tag (or image.tag: ...)
+        "image\\.tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?",
+        "(?s)image:\\s*\\n\\s*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
+      ],
+      // Replace the value below with the actual image name for this chart
+      "depNameTemplate": "ghcr.io/immich-app/immich-server",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
     }
   ]
 }
