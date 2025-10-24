@@ -35,12 +35,11 @@
       "customType": "regex",
       "managerFilePatterns": [
         // scope to specific values files / chart paths where tag-only occurs
-        "/^k8s/immich\\.yaml$/",
         "/^charts/mychart/.+values\\.ya?ml$/"
       ],
       "matchStrings": [
-        // match tag anywhere directly under an image block (allows intermediate indented keys)
-        "(?s)image:\\s*(?:\\n[ \\t]+[A-Za-z0-9_.-]+:.*?)*\\n[ \\t]*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
+        // match tag under an image block only if there is NO repository/repo line between image: and tag:
+        "(?s)image:\\s*(?:(?![ \\t]+(?:repository|repo):)[\\s\\S])*?\\n[ \\t]*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
       ],
       // Replace the value below with the concrete image name for that file/path
       "depNameTemplate": "ghcr.io/immich-app/immich-server",
