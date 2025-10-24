@@ -27,6 +27,21 @@
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{{depName}}}",
       "versioningTemplate": "docker"
+    },
+
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^k8s/.*\\.ya?ml$/",
+        "/^k8s/.*\\.yaml$/",
+        "/^charts/.+values\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "controllers:\\s*\\n[\\s\\S]*?main:\\s*\\n[\\s\\S]*?containers:\\s*\\n[\\s\\S]*?main:\\s*\\n[\\s\\S]*?image:\\s*\\n[\\s\\S]*?tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/immich-app/immich-server",
+      "versioningTemplate": "docker"
     }
   ]
 }
