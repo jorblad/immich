@@ -11,33 +11,38 @@
       "customType": "regex",
       "managerFilePatterns": [
         "/^k8s/.*\\.ya?ml$/",
-        "/^k8s/.*\\.yaml$/"
+        "/^k8s/.*\\.yaml$/",
+        "/^charts/.+values\\.ya?ml$/"
       ],
       "matchStrings": [
-        // tag form e.g. image: registry:5000/org/name:tag or image: org/name:tag
+        // single-line tag or with registry: org/name:tag
         "image:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+):(?<currentValue>[^'\\\"\\s@]+)['\\\"]?",
-        // digest form e.g. image: registry/org/name@sha256:abcdef...
-        "image:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+)@(?<currentValue>sha256:[0-9a-fA-F]+)['\\\"]?"
+        // digest form: org/name@sha256:...
+        "image:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+)@(?<currentValue>sha256:[0-9a-fA-F]+)['\\\"]?",
+        // multi-line repository + tag under image:  (captures repository as depName and tag)
+        "(?s)image:\\s*\\n(?:[ \\t]+(?:repository|repo):\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+)['\\\"]?.*?)*\\n[ \\t]*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?",
+        // dotted single-line keys: image.repository: org/name  and image.tag: 1.2.3
+        "image\\.repository:\\s*['\\\"]?(?<depName>(?:[A-Za-z0-9.-]+(?::\\d+)?/)?[A-Za-z0-9._/-]+)['\\\"]?\\s*\\n?\\s*image\\.tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{{depName}}}",
       "versioningTemplate": "docker"
     },
 
-    // Example manager for values files that only contain a tag (no repository).
-    // Renovate cannot infer the image name from a lone tag; supply the image via depNameTemplate.
+    // Example tag-only manager: matches tag under any nested image block,
+    // but MUST be scoped to files/paths where you can supply the actual image name.
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/^k8s/.+values\\.ya?ml$/",
-        "/^charts/mychart/.+values\\.ya?ml$/" 
+        // scope to specific values files / chart paths where tag-only occurs
+        "/^k8s/immich\\.yaml$/",
+        "/^charts/mychart/.+values\\.ya?ml$/"
       ],
       "matchStrings": [
-        // match a lone tag under image.tag (or image.tag: ...)
-        "image\\.tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?",
-        "(?s)image:\\s*\\n\\s*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
+        // match tag anywhere directly under an image block (allows intermediate indented keys)
+        "(?s)image:\\s*(?:\\n[ \\t]+[A-Za-z0-9_.-]+:.*?)*\\n[ \\t]*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
       ],
-      // Replace the value below with the actual image name for this chart
+      // Replace the value below with the concrete image name for that file/path
       "depNameTemplate": "ghcr.io/immich-app/immich-server",
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
