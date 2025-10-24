@@ -27,24 +27,6 @@
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{{depName}}}",
       "versioningTemplate": "docker"
-    },
-
-    // Example tag-only manager: matches tag under any nested image block,
-    // but MUST be scoped to files/paths where you can supply the actual image name.
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        // scope to specific values files / chart paths where tag-only occurs
-        "/^charts/mychart/.+values\\.ya?ml$/"
-      ],
-      "matchStrings": [
-        // match tag under an image block only if there is NO repository/repo line between image: and tag:
-        "(?s)image:\\s*(?:(?![ \\t]+(?:repository|repo):)[\\s\\S])*?\\n[ \\t]*tag:\\s*['\\\"]?(?<currentValue>[^'\\\"\\s]+)['\\\"]?"
-      ],
-      // Replace the value below with the concrete image name for that file/path
-      "depNameTemplate": "ghcr.io/immich-app/immich-server",
-      "datasourceTemplate": "docker",
-      "versioningTemplate": "docker"
     }
   ]
 }
