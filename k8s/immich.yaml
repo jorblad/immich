@@ -141,14 +141,14 @@ spec:
               replicas: 2
               strategy: RollingUpdate
               affinity:
-              podAntiAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution:
-                  - weight: 100
-                    podAffinityTerm:
-                      labelSelector:
-                        matchLabels:
-                          app.kubernetes.io/name: machine-learning
-                      topologyKey: "kubernetes.io/hostname"
+                podAntiAffinity:
+                  preferredDuringSchedulingIgnoredDuringExecution:
+                    - weight: 100
+                      podAffinityTerm:
+                        labelSelector:
+                          matchLabels:
+                            app.kubernetes.io/name: machine-learning
+                        topologyKey: "kubernetes.io/hostname"
           persistence:
             cache:
               enabled: true
