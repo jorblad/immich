@@ -99,7 +99,7 @@ spec:
                 - secretName: immich-jorblad-se-tls
                   hosts:
                     - immich.jorblad.se
-          controller:
+          controllers:
             main:
               replicas: 1
               strategy: RollingUpdate
@@ -125,7 +125,7 @@ spec:
 
         machine-learning:
           enabled: true
-          controller:
+          controllers:
             main:
               containers:
                 main:
