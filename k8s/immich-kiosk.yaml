@@ -66,6 +66,8 @@ spec:
             value: "false"
           - name: KIOSK_EXCLUDED_ALBUMS
             value: "c5c36509-af76-444f-9423-192761e97485,d4519543-56ac-4da7-bbca-a6a4e9957f9a,7f6403d6-e52c-4fad-b82f-62ad652c0d59"
+          - name: KIOSK_ENABLE_URL_BUILDER
+            value: "true"
 
 ---
 apiVersion: v1
@@ -95,7 +97,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
-  - host: immich-kiosk.jorblad.se
+  - host: immich-kiosk.k8s.jorblad.se
     http:
       paths:
       - backend:
@@ -107,5 +109,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - immich-kiosk.jorblad.se
-    secretName: immich-kiosk-jorblad-se-tls
+    - immich-kiosk.k8s.jorblad.se
+    secretName: immich-kiosk-k8s-jorblad-se-tls
