@@ -74,6 +74,13 @@ spec:
                           matchLabels:
                             app.kubernetes.io/name: redis
                         topologyKey: "kubernetes.io/hostname"
+          persistence:
+            data:
+              enabled: true
+              size: 1Gi
+              # Optional: Set this to persistentVolumeClaim to keep job queues persistent
+              type: persistentVolumeClaim
+              accessMode: ReadWriteMany
 
         server:
           enabled: true
