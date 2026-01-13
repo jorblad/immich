@@ -137,10 +137,6 @@ spec:
                     pullPolicy: IfNotPresent
                   env:
                     TRANSFORMERS_CACHE: /cache
-              resources:
-                limits:
-                  cpu: 1
-                  memory: 1024Mi
               replicas: 2
               strategy: RollingUpdate
               affinity:
