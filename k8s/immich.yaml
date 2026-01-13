@@ -110,10 +110,6 @@ spec:
             main:
               replicas: 1
               strategy: RollingUpdate
-              resources:
-                limits:
-                  cpu: 1
-                  memory: 1024Mi
               affinity:
                 podAntiAffinity:
                   preferredDuringSchedulingIgnoredDuringExecution:
