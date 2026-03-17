@@ -62,7 +62,7 @@ spec:
                 main:
                   image:
                     repository: docker.io/valkey/valkey
-                    tag: 9.0-alpine
+                    tag: 9.1-alpine
                     pullPolicy: IfNotPresent
               replicas: 1
               affinity:
