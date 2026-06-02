@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-kiosk-custom-css
+  namespace: immich
+data:
+  custom.css: |
+    /* Applied to all devices */
+    #clock,
+    #weather,
+    .clock--time {
+        font-size: 6rem;
+    }
+    .clock--date {
+        font-size: 3rem;
+    }
+    .image--metadata {
+        padding: 4rem;
+    }
+
+    /* Applied to devices with ?custom_css_class=foo */
+    .foo #clock,
+    .foo #weather,
+    .foo .image--metadata {
+        padding: 2rem;
+    }
+
+    /* Target images tagged with "kiosk-contain" */
+    img[data-tags~="kiosk-contain"] {
+        object-fit: contain;
+    }

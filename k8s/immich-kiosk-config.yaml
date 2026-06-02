@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-kiosk-config
+  namespace: immich
+data:
+  config.yaml: |
+    lang: sv_SE
+    timezone: Europe/Stockholm
+    date_format: YYYY-MM-DD
+    album: all
+    layout: splitview
+    show_time: true
+    show_date: true
+    show_album_name: true
+    show_person_name: true
+    show_person_age: true
+    show_image_location: true
+    background_blur: false
+    enable_url_builder: true
+    custom_css_class: ""
+    weather:
+      locations:
+        - name: "Lövstad"
+          lat: 57.919431737528896
+          lon: 14.660768772826415
+          api: "034204a7cefa88cca537880e12ed3f4a"
+          unit: metric
+          round_temperature: true
+          lang: sv
+          forecast: false
+          show:
+            temperature_range: true
+            humidity: false
+            wind: true
+            wind_direction: false
+            visibility: false
+          default: true
