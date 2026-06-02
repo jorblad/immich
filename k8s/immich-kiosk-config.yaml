@@ -20,7 +20,7 @@ data:
         - name: Vireda
           lat: 57.919431737528896
           lon: 14.660768772826415
-          api: "034204a7cefa88cca537880e12ed3f4a"
+          api: 034204a7cefa88cca537880e12ed3f4a
           unit: metric
           round_temperature: true
           lang: sv
