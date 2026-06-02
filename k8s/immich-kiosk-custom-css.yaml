@@ -12,7 +12,7 @@ data:
         font-size: 6rem;
     }
     .clock--date {
-        font-size: 3rem;
+        font-size: 2rem;
     }
     .image--metadata {
         padding: 4rem;
