@@ -17,7 +17,7 @@ data:
     custom_css_class: ""
     weather:
       locations:
-        - name: "Lövstad"
+        - name: Vireda
           lat: 57.919431737528896
           lon: 14.660768772826415
           api: "034204a7cefa88cca537880e12ed3f4a"
