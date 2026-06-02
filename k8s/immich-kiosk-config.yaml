@@ -5,10 +5,7 @@ metadata:
   namespace: immich
 data:
   config.yaml: |
-    lang: sv_SE
-    timezone: Europe/Stockholm
     date_format: YYYY-MM-DD
-    album: all
     layout: splitview
     show_time: true
     show_date: true
@@ -17,7 +14,6 @@ data:
     show_person_age: true
     show_image_location: true
     background_blur: false
-    enable_url_builder: true
     custom_css_class: ""
     weather:
       locations:
