@@ -137,7 +137,7 @@ spec:
                     pullPolicy: IfNotPresent
                   env:
                     TRANSFORMERS_CACHE: /cache
-              replicas: 2
+              replicas: 1
               strategy: RollingUpdate
               affinity:
                 podAntiAffinity:
