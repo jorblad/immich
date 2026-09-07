@@ -7,7 +7,20 @@ spec:
   #imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
   imageName: ghcr.io/immich-app/postgres:16-vectorchord0.4.2-pgvectors0.3.0
   instances: 2  # Number of PostgreSQL replicas
-  #enablePDB: false
+  backup:
+    barmanObjectStore:
+      destinationPath: "s3://cnpg/immich-db/"
+      endpointURL: "http://192.168.210.30:30188"
+      s3Credentials:
+        accessKeyId:
+          name: garage-s3-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: garage-s3-creds
+          key: ACCESS_SECRET_KEY
+        region:
+          name: garage-s3-creds
+          key: AWS_REGION
   enableSuperuserAccess: true
   postgresUID: 999
   postgresGID: 999
@@ -37,19 +50,13 @@ spec:
       - 'vectors.so'
       - 'vchord'
 
-#bootstrap:
-# initdb:
-#   database: immich
-#   owner: immich
-#   secret:
-#     name: immich-pg-user
-#    dataChecksums: true
-#    postInitApplicationSQL:
-#      - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-#      - SET search_path TO "$user", public, vectors;
-#      - CREATE EXTENSION IF NOT EXISTS "vectors";
-#      - CREATE EXTENSION IF NOT EXISTS "cube";
-#      - CREATE EXTENSION IF NOT EXISTS "earthdistance";
-#      - ALTER SCHEMA vectors OWNER TO "immich";
-#      - GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA vectors TO "immich";
-#      - GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "immich";
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: immich-db-daily-backup
+  namespace: immich
+spec:
+  schedule: "0 0 2 * * *" # Daily at 2:00 AM
+  cluster:
+    name: immich-db
