@@ -167,15 +167,9 @@ spec:
           persistence:
             cache:
               enabled: true
+              type: persistentVolumeClaim
               size: 10Gi
-              # Optional: Set this to pvc to avoid downloading the ML models every start.
-              # type: pvc   # <- removed; let the chart infer via existingClaim or use allowed type
-              type: ""
-              # If you want to use an existing PVC:
-              # existingClaim: your-ml-cache-pvc
-              # Optional fallback:
-              # type: pvc
-              # existingClaim: immich-ml-cache-pvc
+              accessMode: ReadWriteMany
             lightroom:
               enabled: true
               mountPath: /mnt/lightroom
