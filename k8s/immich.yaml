@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: oci://ghcr.io/immich-app/immich-charts/immich
     chart: immich
-    targetRevision: 0.13.2
+    targetRevision: 0.13.4
     helm:
       values: |
         controllers:
@@ -16,10 +16,11 @@ spec:
             containers:
               main:
                 image:
-                  tag: v3.2.4
+                  tag: v3.3.0
                 env:
                   METRICS_ENABLED: "true"
-                  IMMICH_TELEMETRY_INCLUDE: all
+                  IMMICH_TELEMETRY_INCLUDE: "all" 
+                  MACHINE_LEARNING_MODEL_REVISION: "v2" 
                   IMMICH_MACHINE_LEARNING_URL: "http://immich-app-machine-learning:3003"
                   DB_HOSTNAME:
                     valueFrom:
