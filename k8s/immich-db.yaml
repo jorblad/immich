@@ -6,7 +6,7 @@ metadata:
 spec:
   #imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
   imageName: ghcr.io/immich-app/postgres:16-vectorchord0.4.2-pgvectors0.3.0
-  instances: 2  # Number of PostgreSQL replicas
+  instances: 2 # Number of PostgreSQL replicas
   backup:
     barmanObjectStore:
       destinationPath: "s3://cnpg/immich-db/"
@@ -21,23 +21,25 @@ spec:
         region:
           name: garage-s3-creds
           key: AWS_REGION
+    plugins:
+    - name: barman-cloud.cnpg.io
   enableSuperuserAccess: true
   postgresUID: 999
   postgresGID: 999
   managed:
     roles:
-      - name: immich
-        superuser: true
-        login: true
+    - name: immich
+      superuser: true
+      login: true
 
-      - name: app
-        superuser: true
-        login: true
+    - name: app
+      superuser: true
+      login: true
 
   storage:
     pvcTemplate:
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteOnce
       resources:
         requests:
           storage: 15Gi
@@ -47,9 +49,8 @@ spec:
   primaryUpdateStrategy: unsupervised
   postgresql:
     shared_preload_libraries:
-      - 'vectors.so'
-      - 'vchord'
-
+    - 'vectors.so'
+    - 'vchord'
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
