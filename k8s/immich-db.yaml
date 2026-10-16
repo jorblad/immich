@@ -12,20 +12,20 @@ spec:
     isWALArchiver: true
     parameters:
       barmanObjectName: garage-s3-store
-  backup:
-    barmanObjectStore:
-      destinationPath: "s3://cnpg/immich-db/"
-      endpointURL: "http://192.168.210.30:30188"
-      s3Credentials:
-        accessKeyId:
-          name: garage-s3-creds
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: garage-s3-creds
-          key: ACCESS_SECRET_KEY
-        region:
-          name: garage-s3-creds
-          key: AWS_REGION
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: "s3://cnpg/immich-db/"
+  #     endpointURL: "http://192.168.210.30:30188"
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: garage-s3-creds
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: garage-s3-creds
+  #         key: ACCESS_SECRET_KEY
+  #       region:
+  #         name: garage-s3-creds
+  #         key: AWS_REGION
 
   enableSuperuserAccess: true
   postgresUID: 999
@@ -65,6 +65,9 @@ spec:
   schedule: "0 0 2 * * *" # Daily at 2:00 AM
   cluster:
     name: immich-db
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
 ---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
