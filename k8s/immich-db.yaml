@@ -10,8 +10,7 @@ spec:
   plugins:
   - name: barman-cloud.cloudnative-pg.io
     isWALArchiver: true
-    parameters:
-      barmanObjectName: garage-s3-store
+    barmanObjectName: garage-s3-store
   # backup:
   #   barmanObjectStore:
   #     destinationPath: "s3://cnpg/immich-db/"
