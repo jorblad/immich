@@ -7,22 +7,25 @@ spec:
   #imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16-v0.3.0  # Use the custom image
   imageName: ghcr.io/immich-app/postgres:16-vectorchord0.4.2-pgvectors0.3.0
   instances: 2 # Number of PostgreSQL replicas
-  backup:
-    barmanObjectStore:
-      destinationPath: "s3://cnpg/immich-db/"
-      endpointURL: "http://192.168.210.30:30188"
-      s3Credentials:
-        accessKeyId:
-          name: garage-s3-creds
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: garage-s3-creds
-          key: ACCESS_SECRET_KEY
-        region:
-          name: garage-s3-creds
-          key: AWS_REGION
-    plugins:
-    - name: barman-cloud.cnpg.io
+  plugins:
+  - name: barman-cloud.cnpg.io
+    isWalArchiver: true
+    barmanObjectStore: garage-s3-store
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: "s3://cnpg/immich-db/"
+  #     endpointURL: "http://192.168.210.30:30188"
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: garage-s3-creds
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: garage-s3-creds
+  #         key: ACCESS_SECRET_KEY
+  #       region:
+  #         name: garage-s3-creds
+  #         key: AWS_REGION
+
   enableSuperuserAccess: true
   postgresUID: 999
   postgresGID: 999
@@ -61,3 +64,20 @@ spec:
   schedule: "0 0 2 * * *" # Daily at 2:00 AM
   cluster:
     name: immich-db
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: garage-s3-store
+  namespace: immich
+spec:
+  configuration:
+    destinationPath: s3://cnpg/immich-db/
+    endpointURL: http://192.168.210.30:30188
+    s3Credentials:
+      accessKeyId:
+        name: garage-s3-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: garage-s3-creds
+        key: ACCESS_SECRET_KEY
