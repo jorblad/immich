@@ -8,9 +8,10 @@ spec:
   imageName: ghcr.io/immich-app/postgres:16-vectorchord0.4.2-pgvectors0.3.0
   instances: 2 # Number of PostgreSQL replicas
   plugins:
-  - name: barman-cloud.cnpg.io
+  - name: barman-cloud.cloudnative-pg.io
     isWalArchiver: true
-    barmanObjectStore: garage-s3-store
+    parameters:
+      barmanObjectName: garage-s3-store
   # backup:
   #   barmanObjectStore:
   #     destinationPath: "s3://cnpg/immich-db/"
@@ -71,6 +72,7 @@ metadata:
   name: garage-s3-store
   namespace: immich
 spec:
+  retentionPolicy: 60d
   configuration:
     destinationPath: s3://cnpg/immich-db/
     endpointURL: http://192.168.210.30:30188
