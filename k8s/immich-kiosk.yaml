@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: immich-kiosk
-          image: ghcr.io/damongolding/immich-kiosk:0.45.1
+          image: ghcr.io/damongolding/immich-kiosk:0.45.2
           ports:
             - containerPort: 3000
           env:
