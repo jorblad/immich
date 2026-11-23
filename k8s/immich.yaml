@@ -116,10 +116,10 @@ spec:
                   resources:
                     requests:
                       cpu: "1"
-                      memory: 2Gi
+                      memory: 1Gi
                     limits:
-                      cpu: "2"
-                      memory: 4Gi
+                      cpu: "6"
+                      memory: 12Gi
               affinity:
                 podAntiAffinity:
                   preferredDuringSchedulingIgnoredDuringExecution:
@@ -149,11 +149,11 @@ spec:
                     TRANSFORMERS_CACHE: /cache
                   resources:
                     requests:
-                      cpu: "2"
-                      memory: 8Gi
+                      cpu: "1"
+                      memory: 4Gi
                     limits:
-                      cpu: "4"
-                      memory: 16Gi
+                      cpu: "6"
+                      memory: 24Gi
               replicas: 1
               strategy: RollingUpdate
               affinity:
